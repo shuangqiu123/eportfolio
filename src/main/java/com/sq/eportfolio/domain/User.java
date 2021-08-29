@@ -3,6 +3,9 @@ package com.sq.eportfolio.domain;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.MongoId;
 
 import java.util.List;
 
@@ -10,19 +13,23 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
-    private String userId;
 
-    private String userName;
+	@MongoId
+	private String userId;
 
-    private String preferredName;
+	@Indexed(unique = true)
+	private String userName;
 
-    private String password;
+	private String password;
 
-    private List<String> tags;
+	private List<String> tags;
 
-    private String email;
+	@Indexed(unique = true)
+	private String email;
 
-    private String name;
+	private String name;
 
-    private String description;
+	private String description;
+
+	private Boolean isVerified;
 }
