@@ -1,6 +1,5 @@
 package com.sq.eportfolio.service;
 
-import com.sq.eportfolio.config.BCryptConfig;
 import com.sq.eportfolio.domain.User;
 import com.sq.eportfolio.dto.user.UserGetDto;
 import com.sq.eportfolio.dto.user.UserLoginDto;
@@ -22,8 +21,17 @@ public class UserService {
 	public UserGetDto signup(UserPostDto userPostDto) {
 		User user = new User();
 		BeanUtils.copyProperties(userPostDto, user);
+		String email = user.getEmail();
+		String username = user.getUserName();
 
-		return null;
+		if (userRepository.findUserByEmail(email) != null || userRepository.findUserByUserName(username) != null) {
+			return null;
+		}
+
+		User savedUser = userRepository.save(user);
+		UserGetDto userGetDto = new UserGetDto();
+		BeanUtils.copyProperties(savedUser, userGetDto);
+		return userGetDto;
 	}
 
 	public UserGetDto login(UserLoginDto userLoginDto) {

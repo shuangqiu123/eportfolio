@@ -21,10 +21,22 @@ import javax.validation.Valid;
 public class AuthController {
 	private final UserService userService;
 
+	@ApiOperation("Sign up")
+	@ApiResponses({
+			@ApiResponse(code = 200, message = "successful sign up", response = UserGetDto.class),
+			@ApiResponse(code = 400, message = "unsuccessful sign up")
+	})
 	@PostMapping("/signup")
-	public UserGetDto signup(@RequestBody @Valid UserPostDto userPostDto) {
-		userService.signup(userPostDto);
-		return null;
+	public ResponseEntity<UserGetDto> signup(@RequestBody @Valid UserPostDto userPostDto) {
+		UserGetDto userGetDto = userService.signup(userPostDto);
+		if (userGetDto == null) {
+			return ResponseEntity
+					.status(400)
+					.body(null);
+		}
+		return ResponseEntity
+				.ok()
+				.body(userGetDto);
 	}
 
 	@ApiOperation("Log in")
@@ -43,7 +55,7 @@ public class AuthController {
 
 		return ResponseEntity
 				.ok()
-				.header("Bearer", " " + userGetDto.getToken())
+				.header("Authorization", " " + userGetDto.getToken())
 				.body(userGetDto);
 	}
 

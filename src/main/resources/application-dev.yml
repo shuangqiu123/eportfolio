@@ -1,10 +1,13 @@
 spring:
   data:
     mongodb:
-      authentication-database: admin
       database: eportfolio
-      username: root
-      password: 123456
       host: localhost
       port: 27017
       auto-index-creation: true
+
+jwt:
+  secret: thisVichyssoiseOfVerbiageVeersMostVerbose
+  expiration: 624000
+  tokenHeader: Authorization
+  tokenHead: Bearer

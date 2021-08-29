@@ -13,6 +13,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.security.web.authentication.preauth.PreAuthenticatedAuthenticationToken;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -25,6 +26,7 @@ import java.util.Set;
 /**
  * if the request contains token. Use the token to log in.
  */
+@Component
 public class JwtAuthenticationTokenFilter extends OncePerRequestFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtAuthenticationTokenFilter.class);
 
