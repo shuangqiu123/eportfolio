@@ -46,6 +46,7 @@
 		"lint:js": "eslint --cache --max-warnings=0 --ext .js,.jsx,.ts,.tsx ./src",
 		"lint:fix": "eslint --cache --fix --ext .js,.jsx,.ts,.tsx ./src",
 		"lint:style": "stylelint \"src/**/*.less\" --syntax less",
+		"lint:style-fix": "stylelint --fix \"src/**/*.less\" --syntax less",
 		"eject": "react-scripts eject"
 	},
 	"browserslist": {
@@ -59,5 +60,8 @@
 			"last 1 firefox version",
 			"last 1 safari version"
 		]
+	},
+	"devDependencies": {
+		"@types/react-router-dom": "^5.1.8"
 	}
 }
