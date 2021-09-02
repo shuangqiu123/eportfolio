@@ -8,13 +8,23 @@ export interface User {
 	isVerified?: boolean;
 }
 
-export interface UserLoginRequest {
+export interface IUserStoreState {
+	userId: string;
+	userName: string;
+	tags: string[];
+	email: string;
+	name: string;
+	description?: string;
+	isVerified?: boolean;
+}
+
+export interface IUserLoginRequest {
 	userName?: string;
 	email?: string;
 	password: string;
 }
 
-export interface UserPostRequest {
+export interface IUserPostRequest {
 	userId?: string;
 	userName: string;
 	email: string;
