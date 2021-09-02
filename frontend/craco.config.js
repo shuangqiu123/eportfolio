@@ -1,8 +1,9 @@
-const { when, whenDev, whenProd } = require('@craco/craco');
+const { when, whenDev, whenProd, loaderByName } = require('@craco/craco');
 const webpack = require("webpack");
 const CracoLessPlugin = require('craco-less');
 const CracoVtkPlugin = require('craco-vtk');
 const WebpackBar = require('webpackbar');
+const CompressionPlugin = require("compression-webpack-plugin");
 const CircularDependencyPlugin = require('circular-dependency-plugin');
 const FastRefreshCracoPlugin = require('craco-fast-refresh');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -64,7 +65,7 @@ module.exports = {
 							}
 						}
 					}),
-					new CompressionWebpackPlugin({
+					new CompressionPlugin({
 						algorithm: 'gzip',
 						test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$'),
 						threshold: 1024,
@@ -153,7 +154,25 @@ module.exports = {
 					modifyVars: { "@primary-color": "#1DA57A" },
 					javascriptEnabled: true
 				}
-			}
+			},
+			modifyLessRule(lessRule, context) {
+				// You have to exclude these file suffixes first,
+				// if you want to modify the less module's suffix
+				lessRule.exclude = /\.less$/;
+				return lessRule;
+			  },
+			  modifyLessModuleRule(lessModuleRule, context) {
+				// Configure the file suffix
+				lessModuleRule.test = /\.less$/;
+	  
+				// Configure the generated local ident name.
+				const cssLoader = lessModuleRule.use.find(loaderByName("css-loader"));
+				cssLoader.options.modules = {
+				  localIdentName: "[local]_[hash:base64:5]",
+				};
+	  
+				return lessModuleRule;
+			  },
 		  }
 		},
 	],

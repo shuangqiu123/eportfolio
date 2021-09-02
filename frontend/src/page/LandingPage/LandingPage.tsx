@@ -1,11 +1,11 @@
 import React from "react";
-
+import LandingPageLayout from "@/layout/LandingPageLayout";
 
 const LandingPage: React.FC = () => {
 	return (
-		<div>
+		<LandingPageLayout>
 			Hello World!
-		</div>
+		</LandingPageLayout>
 	);
 };
 
