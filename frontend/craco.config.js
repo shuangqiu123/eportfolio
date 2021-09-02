@@ -63,6 +63,12 @@ module.exports = {
 								pure_funcs: ["console.log"]
 							}
 						}
+					}),
+					new CompressionWebpackPlugin({
+						algorithm: 'gzip',
+						test: new RegExp('\\.(' + ['js', 'css'].join('|') + ')$'),
+						threshold: 1024,
+						minRatio: 0.8
 					})
 				], []
 			)
