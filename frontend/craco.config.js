@@ -38,8 +38,7 @@ module.exports = {
 						allowAsyncCycles: false,
 						cwd: process.cwd()
 					}),
-					new DashboardPlugin(),
-					new webpack.HotModuleReplacementPlugin()
+					new DashboardPlugin()
 				], []
 			),
 			...when(
@@ -151,7 +150,9 @@ module.exports = {
 		  options: {
 			lessLoaderOptions: {
 				lessOptions: {
-					modifyVars: { "@primary-color": "#1DA57A" },
+					modifyVars: {
+						"@primary-color": "#1DA57A"
+					},
 					javascriptEnabled: true
 				}
 			},

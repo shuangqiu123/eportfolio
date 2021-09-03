@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { IStoreState } from "@/interface/Redux";
-import EportIcon from "@/asset/icon/EportIcon.svg";
+import EportText from "@/asset/icon/EportText.svg";
+import EportTextWhite from "@/asset/icon/EportText-white.svg";
 import Toggler from "./components/Toggler";
 import styles from "./Header.less";
 
 interface IHeaderProps {
-	isLogin: boolean;
+	userId: string;
 	userName: string;
+	isLogoWhite: boolean;
 }
 
-const Header: React.FC<IHeaderProps> = (
-	isLogin,
-	userName
-) => {
+const Header: React.FC<IHeaderProps> = ({
+	userId,
+	userName,
+	isLogoWhite
+}) => {
 	const [visible, setVisible] = useState<boolean>(false);
 
 	const renderLoginSignUpButtons = () => (
@@ -55,23 +58,25 @@ const Header: React.FC<IHeaderProps> = (
 	const toggler = () => {
 		setVisible(prev => !prev);
 	};
-
 	return (
-		<div className={styles.headerContainer}>
-			<img src={EportIcon} className={styles.logoIcon} alt="Eport Icon" />
+		<header className={styles.headerContainer}>
+			{isLogoWhite?
+					<img src={EportTextWhite} className={`${styles.logoIcon}`} alt="Eport Icon" /> :
+					<img src={EportText} className={`${styles.logoIcon}`} alt="Eport Icon" />
+			}
 			<div className={styles.rightContainer}>
 				<div className={`${styles.buttonContainer} ${visible? styles.visible : ""}`}>
-					{isLogin? renderHomeLogoutButtons() : renderLoginSignUpButtons()}
+					{userId !== "" ? renderHomeLogoutButtons() : renderLoginSignUpButtons()}
 				</div>
 				<div className={styles.togglerContainer}>
 					<Toggler toggle={toggler} />
 				</div>
 			</div>
-		</div>
+		</header>
 	);
 };
 
 export default connect(({ user }: IStoreState) => ({
-	isLogin: user.userId !== "",
+	userId: user.userId,
 	userName: user.userName
 }))(Header);

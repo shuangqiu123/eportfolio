@@ -1,0 +1,24 @@
+@import "~@/util/util.less";
+
+.landingPageLayout {
+	height: 100vh;
+	background: 
+		~"url(/asset/background/L-MIDTOP-S.png)",
+		~"url(/asset/background/L-MIDBOT-S.png)",
+		~"url(/asset/background/L-BOT-S.png)",
+		~"url(/asset/background/L-BG.png)";
+	background-size: cover, cover, cover, cover;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+
+	.childrenContainer {
+		margin: 15px 15px;
+	}
+}
+
+@media (max-width: @screen-xl) {
+	.landingPageLayout {
+		background:~"url(/asset/background/L-BG.png)";
+		background-size: cover;
+	}
+}

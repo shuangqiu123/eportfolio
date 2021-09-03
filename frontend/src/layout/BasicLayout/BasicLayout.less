@@ -1,0 +1,58 @@
+@import "~@/util/util.less";
+
+.basicLayout {
+	height: 100vh;
+	background: 
+		~"url(/asset/background/L-BOT.png)",
+		~"url(/asset/background/L-MIDBOT.png)",
+		~"url(/asset/background/L-MIDTOP.png)";
+	background-size: cover, cover, cover;
+	background-color: #003362;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: nowrap;
+
+	.childrenContainer {
+		width: 800px;
+		padding: 15px 20px;
+		min-height: 80%;
+		margin: 30px 0;
+		align-self: center;
+
+		&.border {
+			background-color: white;
+			border: 1px solid rgb(235, 238, 245);
+			border-radius: 4px;
+			box-shadow: 0 2px 12px 0 rgb(0 0 0 / 10%);
+		}
+	}
+}
+
+@media (max-width: @screen-xxxl) {
+	.basicLayout {
+		.childrenContainer {
+			position: relative;
+			left: 200px;
+		}
+	}
+}
+
+@media (max-width: @screen-xxl) {
+	.basicLayout {
+		background: 
+			~"url(/asset/background/L-BOT.png)",
+			~"url(/asset/background/L-MIDBOT.png)",
+			~"url(/asset/background/L-MIDBOT.png)";
+		background-size: cover, cover, cover;
+		background-color: #003362;
+	}
+}
+
+@media (max-width: 1400px) {
+	.basicLayout {
+		background: #00336228;
+		.childrenContainer {
+			position: static;
+		}
+	}
+}

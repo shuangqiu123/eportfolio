@@ -1,27 +1,45 @@
+@import "~@/util/util.less";
+
 .headerContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    font-family: Gotham Medium;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: center;
+	padding: 15px 10px;
 
-    .logoIcon {
-        margin-left: 15px;
-    }
+	.logoIcon {
+		margin-left: 15px;
+		width: 213px;
+		height: 27px;
+	}
 
-    .rightContainer{
-        .buttonContainer {
+	.rightContainer {
+		display: flex;
+		align-items: center;
+		.buttonContainer {
+			visibility: hidden;
+			display: flex;
+			align-items: center;
 
-            &.visible {
+			&.visible {
+				visibility: visible;
+			}
 
-            }
+			.button, span {
+				text-decoration: none;
+				color: @grey1;
+				margin: 0 10px;
+				font-size: 26px;
+				font-family: Gotham Book;
+			}
 
-            .button {
-
-            }
-        }
-        
-        .togglerContainer {
-
-        }
-    }
+			.button:hover {
+				font-family: Gotham Medium;
+			}
+		}
+		
+		.togglerContainer {
+			margin: 0 20px;
+		}
+	}
 }
