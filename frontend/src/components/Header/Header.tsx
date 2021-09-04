@@ -5,6 +5,7 @@ import EportText from "@/asset/icon/EportText.svg";
 import EportTextWhite from "@/asset/icon/EportText-white.svg";
 import Toggler from "./components/Toggler";
 import styles from "./Header.less";
+import { useHistory } from "react-router";
 
 interface IHeaderProps {
 	userId: string;
@@ -18,6 +19,7 @@ const Header: React.FC<IHeaderProps> = ({
 	isLogoWhite
 }) => {
 	const [visible, setVisible] = useState<boolean>(false);
+	const history = useHistory();
 
 	const renderLoginSignUpButtons = () => (
 		<>
@@ -61,7 +63,11 @@ const Header: React.FC<IHeaderProps> = ({
 	return (
 		<header className={styles.headerContainer}>
 			{isLogoWhite?
-					<img src={EportTextWhite} className={`${styles.logoIcon}`} alt="Eport Icon" /> :
+					<img src={EportTextWhite}
+						className={`${styles.logoIcon}`}
+						alt="Eport Icon"
+						onClick={() => history.push("/")}
+					/> :
 					<img src={EportText} className={`${styles.logoIcon}`} alt="Eport Icon" />
 			}
 			<div className={styles.rightContainer}>

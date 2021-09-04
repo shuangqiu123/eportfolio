@@ -6,6 +6,7 @@ import {
 } from "react-router-dom";
 import LandingPage from "@/page/LandingPage";
 import Login from "@/page/Login";
+import Register from "./page/Register";
 
 const App: React.FC = () => {
 	return (
@@ -17,6 +18,10 @@ const App: React.FC = () => {
 				<Route path="/user/login">
 					<Login />
 				</Route>
+				<Route path="/user/signup">
+					<Register />
+				</Route>
+
 			</Switch>
 		</Router>
 	);

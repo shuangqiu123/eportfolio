@@ -1,3 +1,5 @@
+@import "~@/util/util.less";
+
 .footer {
 	padding: 20px 0;
 	flex: 1;
@@ -10,5 +12,25 @@
 	.text {
 		font-family: Gotham Book;
 		font-size: 16px;
+	}
+
+	.icons {
+		display: flex;
+		justify-content: center;
+	}
+}
+
+@media (max-width: @screen-xxxl) {
+	.footer {
+		.text {
+			position: relative;
+			left: 200px;
+		}
+	}
+}
+
+@media (max-width: 1400px) {
+	.footer .text {
+		position: static;
 	}
 }

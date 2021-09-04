@@ -1,47 +1,52 @@
 import React from "react";
 import { Form, Input } from "antd";
-import { GoogleOutlined } from "@ant-design/icons";
 import BasicLayout from "@/layout/BasicLayout";
-import Button from "@/components/Button";
+import CustomForm from "@/components/Form";
 import styles from "./Login.less";
+import { IUserLoginForm } from "@/interface/User";
 
-const Login: React.FC = () => (
-	<BasicLayout hasBorder={false}>
-		<div className={styles.loginContainer}>
-			<h1 className={styles.title}>Sign In</h1>
-			<Form
-				layout={"vertical"}
-			>
-				<Form.Item
-					label="Username / Email Address"
-					className={styles.formItem}
+const Login: React.FC = () => {
+	const [form] = Form.useForm();
+
+	// const submit = (values: IUserLoginForm) => {
+	// };
+
+	return (
+		<BasicLayout hasBorder={false}>
+			<CustomForm title="Sign In" onSubmit={()=> {console.log("dada");}}>
+				<Form
+					layout={"vertical"}
 				>
-					<Input
-						className={styles.input}
-						placeholder="Enter your username or email here"
-					/>
-				</Form.Item>
-				<Form.Item
-					label="Password"
-					className={styles.formItem}
-				>
-					<Input
-						className={styles.input}
-						placeholder="Enter your password here"
-						type="password"
-					/>
-				</Form.Item>
-			</Form>
-			<div className={styles.otherlink}>
-				<a href="/user/signup">Sign Up</a>
-			</div>
-			<p>Or you can sign in with:</p>
-			<div className={styles.iconContainer}>
-				<GoogleOutlined width="50px" className={styles.icon} />
-			</div>
-			<Button name="Continue" onClick={() => {console.log("h1llo");}} />
-		</div>
-	</BasicLayout>
-);
+					<Form.Item
+						label="Username / Email Address"
+						name="usernameOrEmail"
+						className={styles.formItem}
+						rules={[{ required: true, message: "Please enter a username or password" }]}
+					>
+						<Input
+							className={styles.input}
+							placeholder="Enter your username or email here"
+						/>
+					</Form.Item>
+					<Form.Item
+						label="Password"
+						name="password"
+						className={styles.formItem}
+						rules={[{ required: true, message: "Please enter a password" }]}
+					>
+						<Input
+							className={styles.input}
+							placeholder="Enter your password here"
+							type="password"
+						/>
+					</Form.Item>
+				</Form>
+				<div className={styles.otherlink}>
+					<a href="/user/signup">Sign Up</a>
+				</div>
+			</CustomForm>
+		</BasicLayout>
+	);
+};
 
 export default Login;

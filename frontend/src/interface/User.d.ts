@@ -24,6 +24,11 @@ export interface IUserLoginRequest {
 	password: string;
 }
 
+export interface IUserLoginForm {
+	userNameOrEmail: string;
+	password: string;
+}
+
 export interface IUserPostRequest {
 	userId?: string;
 	userName: string;
