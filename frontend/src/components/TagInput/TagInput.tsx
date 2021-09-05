@@ -22,7 +22,7 @@ const TagInput: React.FC<ITagInput> = ({
 	};
 
 	const closeTag = (index: number) => {
-		const tags = value;
+		const tags = [...value];
 		tags.splice(index, 1);
 		onChange?.(tags);
 	};
@@ -38,14 +38,18 @@ const TagInput: React.FC<ITagInput> = ({
 				onPressEnter={createTag}
 			/>
 			<div className={styles.tagDisplay}>
-				{value.map((index, value) => (
-					<Tag
-						key={index}
-						closable
-						onClose={() => closeTag}
-					>
-						{value}
-					</Tag>
+				{value.map((v, index) => (
+					<div className={styles.tagContainer}>
+						<Tag
+							key={index}
+							color="magenta"
+							closable
+							onClose={() => closeTag(index)}
+							className={styles.tag}
+						>
+							{v}
+						</Tag>
+					</div>
 				))}
 			</div>
 		</div>

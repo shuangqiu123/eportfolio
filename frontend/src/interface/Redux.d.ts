@@ -4,12 +4,8 @@ import { IUserStoreState } from "./User";
 
 export interface IAction<T = unknown> extends AnyAction {
 	payload?: T;
+	callback?: () => unknown;
 }
-
-export interface IActionCreator<T = unknown> {
-	(payload?: T): IAction<T>;
-}
-
 export interface IStoreState {
 	user: IUserStoreState;
 	loading: ILoadingStoreState;

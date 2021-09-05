@@ -1,6 +1,7 @@
 const { when, whenDev, whenProd, loaderByName } = require('@craco/craco');
 const webpack = require("webpack");
 const CracoLessPlugin = require('craco-less');
+const CracoAntDesignPlugin = require('craco-antd')
 const CracoVtkPlugin = require('craco-vtk');
 const WebpackBar = require('webpackbar');
 const CompressionPlugin = require("compression-webpack-plugin");
@@ -121,14 +122,12 @@ module.exports = {
 		plugins: [
 			["import", {
 				libraryName: "antd",
-				libraryDirectory: "es",
 				style: true
 			}, "antd"],
 			["@babel/plugin-proposal-decorators", {
 				legacy: true
 			}]
 		],
-		loaderOptions: {},
 		loaderOptions: (babelLoaderOptions, {
 			env, paths
 		}) => {
@@ -153,7 +152,7 @@ module.exports = {
 					modifyVars: {
 						"@primary-color": "#1DA57A"
 					},
-					javascriptEnabled: true
+					javascriptEnabled: true,
 				}
 			},
 			modifyLessRule(lessRule, context) {

@@ -4,7 +4,6 @@
 	"private": true,
 	"dependencies": {
 		"@ant-design/icons": "^4.0.0",
-		"@babel/plugin-proposal-decorators": "^7.14.5",
 		"@craco/craco": "^6.2.0",
 		"@testing-library/jest-dom": "^5.14.1",
 		"@testing-library/react": "^11.2.7",
@@ -64,6 +63,9 @@
 		]
 	},
 	"devDependencies": {
-		"@types/react-router-dom": "^5.1.8"
+		"@babel/plugin-proposal-decorators": "^7.15.4",
+		"@types/react-router-dom": "^5.1.8",
+		"install": "^0.13.0",
+		"npm": "^7.22.0"
 	}
 }
