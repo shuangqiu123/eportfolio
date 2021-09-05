@@ -27,7 +27,7 @@ public class UserService {
 		if (userRepository.findUserByEmail(email) != null || userRepository.findUserByUserName(username) != null) {
 			return null;
 		}
-
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		User savedUser = userRepository.save(user);
 		UserGetDto userGetDto = new UserGetDto();
 		BeanUtils.copyProperties(savedUser, userGetDto);

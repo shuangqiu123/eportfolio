@@ -7,7 +7,7 @@ spring:
       auto-index-creation: true
 
 jwt:
-  secret: thisVichyssoiseOfVerbiageVeersMostVerbose
+  secret: thisVichyssoiseOfVerbiageVeersMostVerbose000000thisVichyssoiseOfVerbiageVeersMostVerbose
   expiration: 624000
   tokenHeader: Authorization
   tokenHead: Bearer

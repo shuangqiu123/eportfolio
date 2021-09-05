@@ -16,10 +16,10 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	private static final String[] AUTH_WHITELIST = {
+			"/api/auth/**",
 			"/actuator/**",
 			"/swagger-resources/**",
 			"/swagger-ui.html",
-			"/v2/api-docs",
 	};
 
 	private final JwtAuthenticationTokenFilter jwtAuthenticationTokenFilter;
