@@ -3,22 +3,27 @@
 .landingPageLayout {
 	height: 100vh;
 	background: 
-		~"url(/asset/background/L-MIDTOP-S.png)",
-		~"url(/asset/background/L-MIDBOT-S.png)",
-		~"url(/asset/background/L-BOT-S.png)",
-		~"url(/asset/background/L-BG.png)";
-	background-size: cover, cover, cover, cover;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
+		url(../../asset/background/L-TOP-S.png),
+		url(../../asset/background/L-MIDTOP-S.png),
+		url(../../asset/background/L-MIDBOT-S.png),
+		url(../../asset/background/L-BOT-S.png),
+		url(../../asset/background/L-BG.png);
+  	background-size: cover, cover, cover, cover, cover;
 
 	.childrenContainer {
 		margin: 15px 15px;
 	}
 }
 
-@media (max-width: @screen-xl) {
+@media (max-width: @screen-xxl) {
 	.landingPageLayout {
-		background:~"url(/asset/background/L-BG.png)";
-		background-size: cover;
+		height: 100vh;
+		background: url(../../asset/background/R-SECTION.png),
+		url(../../asset/background/L-MIDTOP-S.png),
+		url(../../asset/background/L-MIDBOT-S.png),
+		url(../../asset/background/L-BOT-S.png),
+		url(../../asset/background/L-BG.png);
+		background-position: left, right, right, right;
+		background-size: cover, cover, cover, cover;
 	}
 }

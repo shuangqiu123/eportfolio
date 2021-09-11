@@ -1,12 +1,11 @@
 const { when, whenDev, whenProd, loaderByName } = require('@craco/craco');
 const webpack = require("webpack");
 const CracoLessPlugin = require('craco-less');
-const CracoAntDesignPlugin = require('craco-antd')
+const CracoAntDesignPlugin = require('craco-antd');
 const CracoVtkPlugin = require('craco-vtk');
 const WebpackBar = require('webpackbar');
 const CompressionPlugin = require("compression-webpack-plugin");
 const CircularDependencyPlugin = require('circular-dependency-plugin');
-const FastRefreshCracoPlugin = require('craco-fast-refresh');
 const TerserPlugin = require('terser-webpack-plugin');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
 const {	BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -122,6 +121,7 @@ module.exports = {
 		plugins: [
 			["import", {
 				libraryName: "antd",
+				libraryDirectory: "es",
 				style: true
 			}, "antd"],
 			["@babel/plugin-proposal-decorators", {
@@ -137,8 +137,6 @@ module.exports = {
 	plugins: [
 		...whenDev(
 			() => [{
-				plugin: FastRefreshCracoPlugin
-			}, {
 				plugin: CracoVtkPlugin()
 			}, {
 				plugin: new AntdDayjsWebpackPlugin()
@@ -149,32 +147,62 @@ module.exports = {
 		  options: {
 			lessLoaderOptions: {
 				lessOptions: {
-					modifyVars: {
-						"@primary-color": "#1DA57A"
-					},
-					javascriptEnabled: true,
-				}
+				  modifyVars: { '@primary-color': '#1DA57A' },
+				  javascriptEnabled: true,
+				},
 			},
 			modifyLessRule(lessRule, context) {
-				// You have to exclude these file suffixes first,
-				// if you want to modify the less module's suffix
-				lessRule.exclude = /\.less$/;
+				lessRule.exclude = /node_modules/;
+				lessRule.test = /\.less$/;
+				lessRule.use = [
+					{ loader: 'style-loader' },
+					{
+						loader: 'css-loader',
+						options: {
+							modules: {
+								localIdentName: '[local]-[hash:base64:5]',
+							},
+						},
+					},
+					{
+						loader: 'less-loader',
+						options: {
+							lessOptions: { javascriptEnabled: true },
+						},
+					},
+				];
 				return lessRule;
-			  },
-			  modifyLessModuleRule(lessModuleRule, context) {
-				// Configure the file suffix
-				lessModuleRule.test = /\.less$/;
-	  
-				// Configure the generated local ident name.
-				const cssLoader = lessModuleRule.use.find(loaderByName("css-loader"));
-				cssLoader.options.modules = {
-				  localIdentName: "[local]_[hash:base64:5]",
-				};
-	  
-				return lessModuleRule;
 			  },
 		  }
 		},
+		// {
+		// 	plugin: CracoLessPlugin,
+		// 	modifyLessRule(lessRule, context) {
+		// 		lessRule.test = /\.less$/;
+		// 		lessRule.include = [
+		// 			path.resolve(__dirname, 'node_modules/antd'),
+		// 		];
+		// 		lessRule.use = [
+		// 			{ loader: 'style-loader' },
+		// 			{
+		// 				loader: 'css-loader',
+		// 			},
+		// 			{
+		// 				loader: 'less-loader',
+		// 				options: {
+		// 					javascriptEnabled: true,
+		// 					lessOptions: {
+		// 						modifyVars: {
+		// 						},
+		// 						javascriptEnabled: true,
+		// 					},
+		// 				},
+		// 			},
+		// 		];
+		// 		return lessRule;
+		// 	}
+		// },
+		{ plugin: CracoAntDesignPlugin }
 	],
 	devServer: {
 		port: 5000,

@@ -1,27 +1,41 @@
 @import "~@/util/util.less";
 
 .landingPage {
-    position: absolute;
-    top: 45%;
-    left:50%;
-    transform: translate(-50%, -50%);
+	position: absolute;
+	top: 45%;
+	left:50%;
+	transform: translate(-50%, -50%);
 
-    .eportText {
-        width: 784px;
-        height: 101px;
-    }
+	.eportText {
+		width: 784px;
+		height: 101px;
+	}
 
-    .eportDescription {
-        color: @grey1;
-        font-family: Gotham Medium;
-        margin-top: 70px;
-        text-align: center;
-    }
+	.eportDescription {
+		color: @grey3;
+		font-style: italic;
+		font-size: 24px;
+		font-family: Gotham Medium;
+		margin-top: 70px;
+		text-align: center;
+	}
 }
 
 @media (max-width: @screen-xl) {
 	.landingPage .eportText {
-        width: 690px;
-        height: 90px;
+		width: 690px;
+		height: 90px;
+	}
+}
+
+@media (max-width: @screen-md) {
+	.landingPage .eportText {
+		width: 500px;
+	}
+}
+
+@media (max-width: @screen-sm) {
+	.landingPage .eportText {
+		width: 100%;
 	}
 }
