@@ -1,5 +1,5 @@
 # Eport - Online Portfolio Website
-
+![GitHub](https://img.shields.io/github/license/shuangqiu123/eportfolio)
 ## About Eport
 
 Eport is an ePortfolio system - one that would act as a collection of *electronic evidence* for the user. Uploading of user-selected documents and files, as well as the ability to update dynamically are key features of a modern ePortfolio system.
