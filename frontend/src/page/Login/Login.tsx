@@ -5,8 +5,7 @@ import BasicLayout from "@/layout/BasicLayout";
 import CustomForm from "@/components/Form";
 import styles from "./Login.less";
 import { EUserActionTypes } from "@/common/User";
-import { IUserLoginForm, IUserLoginRequest } from "@/interface/User";
-
+import { IUserLoginRequest } from "@/interface/User";
 
 const Login: React.FC = () => {
 	const [form] = Form.useForm();

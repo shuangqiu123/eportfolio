@@ -3,7 +3,7 @@ import styles from "./Icon.less";
 
 interface IIconProps {
 	title: string;
-	href: string;
+	href?: string;
 }
 
 const Icon: React.FC<IIconProps> = ({
