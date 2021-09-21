@@ -7,6 +7,7 @@ import {
 import LandingPage from "@/page/LandingPage";
 import Login from "@/page/Login";
 import Register from "./page/Register";
+import OAuth from "./page/OAuth";
 
 const App: React.FC = () => {
 	return (
@@ -21,7 +22,9 @@ const App: React.FC = () => {
 				<Route path="/user/signup">
 					<Register />
 				</Route>
-
+				<Route path="/oauth/:origin">
+					<OAuth />
+				</Route>
 			</Switch>
 		</Router>
 	);
