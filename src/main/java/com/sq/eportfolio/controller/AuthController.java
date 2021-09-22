@@ -1,8 +1,10 @@
 package com.sq.eportfolio.controller;
 
+import com.sq.eportfolio.dto.oauth.OAuthCode;
 import com.sq.eportfolio.dto.user.UserGetDto;
 import com.sq.eportfolio.dto.user.UserLoginDto;
 import com.sq.eportfolio.dto.user.UserPostDto;
+import com.sq.eportfolio.service.AuthService;
 import com.sq.eportfolio.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.io.IOException;
 
 @Controller
 @RequiredArgsConstructor
@@ -20,6 +23,7 @@ import javax.validation.Valid;
 @RequestMapping("/api/auth")
 public class AuthController {
 	private final UserService userService;
+	private final AuthService authService;
 
 	@ApiOperation("Sign up")
 	@ApiResponses({
@@ -59,8 +63,13 @@ public class AuthController {
 				.body(userGetDto);
 	}
 
-	@GetMapping("/oauth/{token}")
-	public UserGetDto oauth(@RequestParam String token) {
-		return null;
+	@GetMapping("/oauth/google")
+	public String oauthGoogle() {
+		return authService.generateGoogleURL();
+	}
+
+	@PostMapping("/oauth/google/token")
+	public UserGetDto oauthGoogleToken(@RequestBody OAuthCode code) throws IOException {
+		return authService.signInByGoogleToken(code.getCode());
 	}
 }

@@ -11,3 +11,9 @@ jwt:
   expiration: 624000
   tokenHeader: Authorization
   tokenHead: Bearer
+
+oauth:
+  google:
+    redirectURL: http://localhost:5000/oauth/google
+    clientId: 413929433417-f5ji4dr4tf36e3q4agbrol5n7buaslhl.apps.googleusercontent.com
+    clientSecret: 1he96IBDy9ip8InllMsqVbes
