@@ -29,8 +29,6 @@ const Register: React.FC<IRegisterProps> = ({
 				payload: payload
 			});
 			form.resetFields();
-		}).catch(error => {
-			console.log(error);
 		});
 	};
 

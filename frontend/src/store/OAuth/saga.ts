@@ -1,7 +1,9 @@
 import { EOAuthActionTypes } from "@/common/OAuth";
 import { IAction } from "@/interface/Redux";
-import { google } from "@/service/OAuth";
+import { User } from "@/interface/User";
+import { google, googleToken } from "@/service/OAuth";
 import { call, ForkEffect, put, takeEvery } from "@redux-saga/core/effects";
+import { setUser } from "../User/action";
 import { setURL } from "./action";
 
 function* googleSignInEffect({ callback }: IAction<string>) {
@@ -10,6 +12,14 @@ function* googleSignInEffect({ callback }: IAction<string>) {
 	yield put(setURL(url));
 }
 
+function* googleTokenEffect({ payload, callback }: IAction<string>) {
+	if (!payload) return;
+	const user: User = yield call(googleToken, payload);
+	callback?.(user);
+	yield put(setUser(user));
+}
+
 export default function* watchUser(): Generator<ForkEffect<never>, void, unknown> {
 	yield takeEvery(EOAuthActionTypes.googleSignIn, googleSignInEffect);
+	yield takeEvery(EOAuthActionTypes.googleToken, googleTokenEffect);
 }

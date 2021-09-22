@@ -22,19 +22,10 @@ const Form: React.FC<IFormProps> = ({
 		dispatch({
 			type: EOAuthActionTypes.googleSignIn,
 			callback: (url: string) => {
-				openWindow(url, "Google", 600, 700);
+				window.location.href = url;
 			}
 		});
 	};
-
-	const openWindow = (url: string, name: string, iWidth: number, iHeight: number) => {
-		const iTop = (window.screen.height - 30 - iHeight) / 2;
-		const iLeft = (window.screen.width - 10 - iWidth) / 2;
-		window.open(url, name, "height=" + iHeight + ",innerHeight=" + iHeight
-	　　　　+ ",width=" + iWidth + ",innerWidth=" + iWidth + ",top=" + iTop + ",left=" + iLeft
-	　　　　+ ",toolbar=no,menubar=no,scrollbars=auto,resizeable=no,location=no,status=no");
-	};
-
 	return (
 		<div className={styles.formContainer}>
 			<h1 className={styles.title}>{title}</h1>
