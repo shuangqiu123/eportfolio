@@ -14,5 +14,9 @@ export async function login(userLoginRequest: IUserLoginRequest): Promise<User> 
 }
 
 export async function signup(userPostRequest: IUserPostRequest): Promise<User> {
-	return request.post("/auth/signup", userPostRequest);
+	return request.post("/auth/signup", userPostRequest)
+		.then(resp => {
+			localStorage.setItem("eportfolio/token", resp.data.token);
+			return resp.data;
+		});
 }

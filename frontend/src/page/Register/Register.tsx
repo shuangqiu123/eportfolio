@@ -2,28 +2,50 @@ import { IStoreState } from "@/interface/Redux";
 import BasicLayout from "@/layout/BasicLayout";
 import Form from "@/components/Form";
 import { Form as AntForm, Input } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { connect, useDispatch } from "react-redux";
 import styles from "./Register.less";
 import TagInput from "@/components/TagInput";
 import { IUserPostRequest } from "@/interface/User";
 import { EUserActionTypes } from "@/common/User";
+import { useHistory } from "react-router";
 
 interface IRegisterProps {
-	isLogin: boolean;
+	userName: string;
+	email: string;
+	name: string;
+	oauthSignUp: boolean;
 }
 
 const Register: React.FC<IRegisterProps> = ({
-	isLogin
+	userName,
+	email,
+	name,
+	oauthSignUp
 }) => {
 	const [form] = AntForm.useForm();
 	const dispatch = useDispatch();
+	const history = useHistory();
+
+	useEffect(() => {
+		if (userName) {
+			history.push(`/${userName}`);
+			return;
+		}
+	}, [history, userName, email]);
 
 	const onSubmit = () => {
 		form.validateFields().then(value => {
-			const payload: IUserPostRequest = {
+			const payload: IUserPostRequest = oauthSignUp ? {
+				...value,
+				email,
+				name
+			}: {
 				...value
 			};
+
+			console.log(payload);
+
 			dispatch({
 				type: EUserActionTypes.signup,
 				payload: payload
@@ -35,7 +57,7 @@ const Register: React.FC<IRegisterProps> = ({
 	return (
 		<BasicLayout hasBorder={false}>
 			<Form
-				title="Sign Up"
+				title={email.length > 0 ? "Finish your sign up" : "Sign Up"}
 				onSubmit={onSubmit}
 			>
 				<AntForm
@@ -43,7 +65,7 @@ const Register: React.FC<IRegisterProps> = ({
 					form={form}
 					validateTrigger="onFinish"
 				>
-					<AntForm.Item
+					{!oauthSignUp && <AntForm.Item
 						label="Your name"
 						name="name"
 						className={styles.formItem}
@@ -55,10 +77,10 @@ const Register: React.FC<IRegisterProps> = ({
 							className={styles.input}
 							placeholder="Enter your name"
 						/>
-					</AntForm.Item>
+					</AntForm.Item>}
 					<AntForm.Item
 						label="Username"
-						name="username"
+						name="userName"
 						className={styles.formItem}
 						rules={[
 							{ required: true, message: "Please enter a username" },
@@ -74,7 +96,7 @@ const Register: React.FC<IRegisterProps> = ({
 							placeholder="Enter your username"
 						/>
 					</AntForm.Item>
-					<AntForm.Item
+					{!oauthSignUp && <AntForm.Item
 						label="Email"
 						name="email"
 						className={styles.formItem}
@@ -90,7 +112,7 @@ const Register: React.FC<IRegisterProps> = ({
 							className={styles.input}
 							placeholder="Enter your Email"
 						/>
-					</AntForm.Item>
+					</AntForm.Item>}
 					<AntForm.Item
 						label="Password"
 						name="password"
@@ -125,5 +147,8 @@ const Register: React.FC<IRegisterProps> = ({
 };
 
 export default connect(({ user }: IStoreState) => ({
-	isLogin: user.userId === ""
+	email: user.email,
+	name: user.name,
+	userName: user.userName,
+	oauthSignUp: user.email.length > 0,
 }))(Register);

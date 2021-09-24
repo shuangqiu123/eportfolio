@@ -1,11 +1,13 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { connect, useDispatch } from "react-redux";
 import { IStoreState } from "@/interface/Redux";
 import EportText from "@/asset/icon/EportText.svg";
 import EportTextWhite from "@/asset/icon/EportText-white.svg";
 import Toggler from "./components/Toggler";
 import styles from "./Header.less";
 import { useHistory } from "react-router";
+import { getItem } from "@/util/localstorage";
+import { EUserActionTypes } from "@/common/User";
 
 interface IHeaderProps {
 	userId: string;
@@ -20,6 +22,17 @@ const Header: React.FC<IHeaderProps> = ({
 }) => {
 	const [visible, setVisible] = useState<boolean>(false);
 	const history = useHistory();
+	const dispatch = useDispatch();
+
+	useEffect(() => {
+		if (userId === "") {
+			const user = getItem("eportfolio/user");
+			dispatch({
+				type: EUserActionTypes.setUser,
+				payload: user
+			});
+		}
+	}, [userId, dispatch]);
 
 	const renderLoginSignUpButtons = () => (
 		<>

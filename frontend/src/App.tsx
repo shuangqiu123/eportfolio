@@ -8,6 +8,7 @@ import LandingPage from "@/page/LandingPage";
 import Login from "@/page/Login";
 import Register from "./page/Register";
 import OAuth from "./page/OAuth";
+import Portfolio from "./page/Portfolio";
 
 const App: React.FC = () => {
 	return (
@@ -16,14 +17,17 @@ const App: React.FC = () => {
 				<Route exact path="/">
 					<LandingPage />
 				</Route>
-				<Route path="/user/login">
+				<Route exact path="/user/login">
 					<Login />
 				</Route>
-				<Route path="/user/signup">
+				<Route exact path="/user/signup">
 					<Register />
 				</Route>
 				<Route path="/oauth/:origin">
 					<OAuth />
+				</Route>
+				<Route path="/:username">
+					<Portfolio />
 				</Route>
 			</Switch>
 		</Router>
