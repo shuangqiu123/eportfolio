@@ -2,6 +2,7 @@ import { EUserActionTypes } from "@/common/User";
 import { IAction } from "@/interface/Redux";
 import { IUserLoginRequest, IUserPostRequest, User } from "@/interface/User";
 import { login, signup } from "@/service/User";
+import { setItem } from "@/util/localstorage";
 import { call, ForkEffect, put, takeEvery } from "@redux-saga/core/effects";
 import { setUser } from "./action";
 
@@ -14,6 +15,7 @@ function* loginEffect({ payload, callback }: IAction<IUserLoginRequest>) {
 		yield put(setUser(user));
 		callback?.();
 	}
+	setItem("/eportfolio/user", user);
 }
 
 function* signupEffect({ payload }: IAction<IUserPostRequest>) {
@@ -21,7 +23,8 @@ function* signupEffect({ payload }: IAction<IUserPostRequest>) {
 		return;
 	}
 	const user: User = yield call(signup, payload);
-	yield put(setUser(user));	
+	yield put(setUser(user));
+	setItem("/eportfolio/user", user);
 }
 
 
