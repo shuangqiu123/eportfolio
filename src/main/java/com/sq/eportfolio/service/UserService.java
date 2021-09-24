@@ -56,12 +56,13 @@ public class UserService {
 		return null;
 	}
 
-	public UserGetDto oauthSignIn(String email) {
+	public UserGetDto oauthSignIn(String email, String name) {
 		User user = userRepository.findUserByEmail(email);
 		UserGetDto userGetDto = new UserGetDto();
 		if (user == null) {
 			user = new User();
 			user.setEmail(email);
+			user.setName(name);
 		}
 		BeanUtils.copyProperties(user, userGetDto);
 		return userGetDto;

@@ -26,7 +26,8 @@ public class GoogleApiConfig {
         return new GoogleAuthorizationCodeFlow.Builder(
                 new NetHttpTransport(), GsonFactory.getDefaultInstance(),
                 clientId, clientSecret,
-                List.of("https://www.googleapis.com/auth/userinfo.profile"))
+                List.of("https://www.googleapis.com/auth/userinfo.profile",
+                        "https://www.googleapis.com/auth/userinfo.email"))
                 .setDataStoreFactory(MemoryDataStoreFactory.getDefaultInstance())
                 .build();
     }

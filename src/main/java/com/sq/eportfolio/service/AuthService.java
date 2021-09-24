@@ -27,12 +27,12 @@ public class AuthService {
 
     public UserGetDto signInByGoogleToken(String code) throws IOException {
         GoogleAuthorizationCodeTokenRequest tokenRequest = oauthClient.newTokenRequest(code);
-        System.out.println(tokenRequest);
         tokenRequest.setRedirectUri(redirectURL);
 
         GoogleTokenResponse response = tokenRequest.execute();
         GoogleIdToken googleIdToken = response.parseIdToken();
         GoogleIdToken.Payload payload = googleIdToken.getPayload();
-        return userService.oauthSignIn(payload.getEmail());
+
+        return userService.oauthSignIn(payload.getEmail(), (String) payload.get("given_name") + " " + (String) payload.get("family_name"));
     }
 }

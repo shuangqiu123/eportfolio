@@ -35,7 +35,8 @@ public class UserPostDto {
 
     @ApiModelProperty(value = "user password", required = true)
     @NotBlank
-    @Pattern(regexp = "^([\\w-\\.]+){1,64}@([\\w&&[^_]]+){2,255}.[a-z]{2,}$")
+    @Pattern(regexp = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+            + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$")
     private String email;
 
     @ApiModelProperty(value = "user full name", required = true)
